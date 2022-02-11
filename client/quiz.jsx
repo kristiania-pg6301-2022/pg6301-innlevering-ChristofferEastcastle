@@ -5,7 +5,7 @@ import {
   Routes,
   useNavigate,
 } from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function FrontPage() {
@@ -35,19 +35,15 @@ function Question({ correctAnswer, answered }) {
   const [question, setQuestion] = useState();
 
   useEffect(async () => {
-    console.log(await axios.get("http://localhost:3000/"))
-    setQuestion(await getQuestion())
+    setQuestion(await getQuestion());
   }, []);
 
-
   async function getQuestion() {
-    return await axios.get("http://localhost:3000/api/question")
+    return await axios.get("http://localhost:3000/api/question");
   }
-
 
   let navigate = useNavigate();
 
-  
   function handleAnswer(answer) {
     answered((a) => a + 1);
     if (isCorrectAnswer(question, answer)) {

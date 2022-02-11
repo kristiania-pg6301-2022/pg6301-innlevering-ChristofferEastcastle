@@ -6,9 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "parcel index.html",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write *.{jsx,js,tsx,ts}",
-    "format:check": "prettier --check *.{jsx,js,tsx,ts}"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +18,6 @@
     "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
-    "concurrently": "^7.0.0",
-    "prettier": "^2.5.1",
-    "process": "^0.11.10"
+    "concurrently": "^7.0.0"
   }
 }
