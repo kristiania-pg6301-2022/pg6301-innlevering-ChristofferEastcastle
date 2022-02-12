@@ -15,7 +15,7 @@ process.on("SIGINT", function () {
 
 dotenv.config();
 const app = express();
-app.use(express.json())
+app.use(express.json());
 
 app.get("/api/question", async (req, res) => {
   async function fetchQuestionFromApi() {
@@ -38,17 +38,17 @@ app.get("/api/question", async (req, res) => {
 });
 
 app.post("/api/question", (req, res) => {
-  const {id, answer} = req.body;
+  const { id, answer } = req.body;
   if (id && answer) {
     res.send(isCorrectAnswer(id, answer));
   } else {
-    res.sendStatus(404);
+    res.sendStatus(400);
   }
 });
 
 app.use(express.static("../client/dist/"));
 
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.sendFile(path.resolve("../client/dist/index.html"));
 });
 
