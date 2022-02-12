@@ -35,14 +35,16 @@ function Question({ correctAnswer, answered }) {
   const [question, setQuestion] = useState();
 
   useEffect(async () => {
-    setQuestion(await getQuestion());
+    const text = await fetchQuestion();
+    setQuestion(text.data)
   }, []);
 
-  async function getQuestion() {
+
+
+  async function fetchQuestion() {
     return await axios.get("http://localhost:3000/api/question");
   }
 
-  let navigate = useNavigate();
 
   function handleAnswer(answer) {
     answered((a) => a + 1);
@@ -53,19 +55,19 @@ function Question({ correctAnswer, answered }) {
       navigate("/answer/wrong");
     }
   }
-
-  return (
-    <div>
-      {/*
-      <h4>{question.question}</h4>
-      {Object.keys(question.answers).map((k) => (
-        <p onClick={() => handleAnswer(k)} key={k}>
-          {question.answers[k]}
-        </p>
-      ))}
-      */}
-    </div>
-  );
+  if (question) {
+    return (
+      <div>
+        <h4>{question.question}</h4>
+        {Object.keys(question.answers).map((k) => (
+          <p onClick={() => handleAnswer(k)} key={k}>
+            {question.answers[k]}
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return <h4>Loading...</h4>
 }
 
 export function QuizApplication() {
