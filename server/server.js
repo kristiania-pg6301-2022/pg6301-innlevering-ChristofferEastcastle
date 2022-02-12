@@ -4,15 +4,6 @@ import dotenv from "dotenv";
 import path from "path";
 import { isCorrectAnswer, randomQuestion } from "./questions.js";
 
-process.once("SIGUSR2", function () {
-  process.kill(process.pid, "SIGUSR2");
-});
-
-process.on("SIGINT", function () {
-  // this is only called on ctrl+c, not restart
-  process.kill(process.pid, "SIGINT");
-});
-
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -52,7 +43,7 @@ app.use((req, res) => {
   res.sendFile(path.resolve("../client/dist/index.html"));
 });
 
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+
+const server = app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server running on http://localhost:${server.address.port}`);
 });

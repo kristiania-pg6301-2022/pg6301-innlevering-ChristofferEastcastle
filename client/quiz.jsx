@@ -28,7 +28,7 @@ function QuestionPage({ answered, correctAnswers }) {
   return (
     <div>
       <h1>Question</h1>
-      <p>/*Click on the one you think is right*/</p>
+      <p>**Click on the one you think is right**</p>
       <Question answered={answered} correctAnswer={correctAnswers} />
     </div>
   );
@@ -43,7 +43,7 @@ function Question({ correctAnswer, answered }) {
   }, []);
 
   async function fetchQuestion() {
-    return axios.get("http://localhost:3000/api/question");
+    return axios.get("/api/question");
   }
 
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ function Question({ correctAnswer, answered }) {
     answered((a) => a + 1);
     navigate("/answer/correct");
 
-    const correct = await axios.post("http://localhost:3000/api/question", {
+    const correct = await axios.post("/api/question", {
       id: question.id,
       answer: answer,
     });
@@ -86,7 +86,12 @@ export function QuizApplication() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<FrontPage answered={answered} correctAnswers={correctAnswers} />} />
+        <Route
+          path="/"
+          element={
+            <FrontPage answered={answered} correctAnswers={correctAnswers} />
+          }
+        />
         <Route
           path="/question"
           element={
