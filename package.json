@@ -9,6 +9,7 @@
     "prettier": "^2.5.1"
   },
   "scripts": {
+    "start": "cd server && npm start",
     "dev": "concurrently npm:dev:server npm:dev:client",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
