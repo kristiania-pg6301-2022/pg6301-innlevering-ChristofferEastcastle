@@ -1,0 +1,17 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+/.idea/
+/server/.env
+/client/.parcel-cache/
+/client/dist/
+/client/node_modules/
+/node_modules/
+/react-express-heroku.iml
+/curl
+/server/node_modules/
