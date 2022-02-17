@@ -4,8 +4,8 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "parcel watch index.html",
-    "build": "parcel build index.html",
+    "dev": "parcel watch index.html login.html",
+    "build": "parcel build index.html login.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

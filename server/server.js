@@ -1,22 +1,38 @@
 import express from "express";
-import axios from "axios";
 import dotenv from "dotenv";
 import path from "path";
 import { isCorrectAnswer, randomQuestion } from "./questions.js";
+import { isAuthorized, tryAuthorize } from "./db.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+app.post("/login", async (req, res) => {
+  const authorized = await tryAuthorize(req.body);
+  if (authorized != null) {
+    res.cookie("id", authorized._id);
+  } else {
+    res.status(401);
+  }
+  res.redirect("/");
+});
+
+app.get("/login", (req, res) => {
+  res.sendFile(path.resolve("../client/dist/login.html"));
+});
+
+app.get("/*", async (req, res, next) => {
+  const authorize = await isAuthorized(req.cookies);
+  console.log(authorize)
+  if (authorize) next();
+  else res.redirect("/login");
+});
 
 app.get("/api/question", async (req, res) => {
-  async function fetchQuestionFromApi() {
-    return (
-      await axios.get(
-        `https://quizapi.io/api/v1/questions?apiKey=${process.env.API_KEY}&topic=Programming&limit=1`
-      )
-    ).data[0];
-  }
-
   const text = randomQuestion();
 
   const question = {
@@ -25,7 +41,7 @@ app.get("/api/question", async (req, res) => {
     answers: text.answers,
   };
 
-  res.header("Access-Control-Allow-Origin", "*").json(question);
+  res.json(question);
 });
 
 app.post("/api/question", (req, res) => {
@@ -43,7 +59,6 @@ app.use((req, res) => {
   res.sendFile(path.resolve("../client/dist/index.html"));
 });
 
-
 const server = app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server running on http://localhost:${server.address.port}`);
+  console.log(`Server running on http://localhost:${server.address().port}`);
 });
