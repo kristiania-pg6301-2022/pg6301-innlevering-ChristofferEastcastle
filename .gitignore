@@ -17,3 +17,4 @@
 /server/node_modules/
 questions-1.js
 client/.eslintrc.cjs
+/certs/

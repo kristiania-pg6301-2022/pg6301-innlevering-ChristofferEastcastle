@@ -4,6 +4,8 @@ import path from "path";
 import { isCorrectAnswer, randomQuestion } from "./questions.js";
 import { isAuthorized, tryAuthorize } from "./db.js";
 import cookieParser from "cookie-parser";
+import https from "https";
+import fs from "fs";
 
 dotenv.config();
 const app = express();
@@ -59,6 +61,17 @@ app.use((req, res) => {
   res.sendFile(path.resolve("../client/dist/index.html"));
 });
 
-const server = app.listen(process.env.PORT || 3000, () => {
+const options = {
+  key: fs.readFileSync("../certs/myCA.key", "utf-8"),
+  cert: fs.readFileSync("../certs/myCA.pem", "utf-8"),
+  passphrase: fs.readFileSync("../certs/pswd", "utf-8")
+}
+console.log(options)
+const server = https.createServer(options, app);
+server.listen(process.env.PORT || 4443, "localhost");
+
+
+/*const server = app.listen(process.env.PORT || 3000, () => {
   console.log(`Server running on http://localhost:${server.address().port}`);
 });
+ */
