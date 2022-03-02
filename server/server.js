@@ -9,14 +9,6 @@ const app = express();
 app.use(express.json());
 
 app.get("/api/question", async (req, res) => {
-  async function fetchQuestionFromApi() {
-    return (
-      await axios.get(
-        `https://quizapi.io/api/v1/questions?apiKey=${process.env.API_KEY}&topic=Programming&limit=1`
-      )
-    ).data[0];
-  }
-
   const text = randomQuestion();
 
   const question = {
@@ -45,5 +37,5 @@ app.use((req, res) => {
 
 
 const server = app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server running on http://localhost:${server.address.port}`);
+  console.log(`Server running on http://localhost:${server.address().port}`);
 });
