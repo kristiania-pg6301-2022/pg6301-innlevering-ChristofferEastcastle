@@ -27,6 +27,6 @@ export async function isAuthorized(cookies) {
   const user = await db
     .collection("users")
     .findOne({ _id: new ObjectId(cookies.id) });
-  return !!user;
+  return user;
 
 }
