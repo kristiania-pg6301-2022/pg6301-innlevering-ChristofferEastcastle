@@ -6,6 +6,7 @@
   "type": "module",
   "devDependencies": {
     "concurrently": "^7.0.0",
+    "husky": "^7.0.4",
     "prettier": "^2.5.1"
   },
   "scripts": {
