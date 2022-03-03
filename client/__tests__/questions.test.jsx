@@ -1,7 +1,7 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 
-import {QuizApplication} from "../quiz";
+import {QuizApplication} from "../quiz.jsx";
 
 
 describe("quiz application", () => {
