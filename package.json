@@ -19,7 +19,8 @@
     "build:server": "cd server && npm install",
     "format": "prettier --write \"client/*.{jsx,js,tsx,ts}\" \"server/*.{jsx,js,tsx,ts}\"",
     "format:check": "prettier --check \"client/*.{jsx,js,tsx,ts}\" \"server/*.{jsx,js,tsx,ts}\"",
-    "test": "cd client && npm test"
+    "test": "cd client && npm test",
+    "verify": "cd client && npm test -- --collectCoverage"
   },
   "engines": {
     "node": "12.22.5",

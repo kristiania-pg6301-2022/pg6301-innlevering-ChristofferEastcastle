@@ -15,3 +15,4 @@
 /react-express-heroku.iml
 /curl
 /server/node_modules/
+/client/coverage/
