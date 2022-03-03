@@ -1,0 +1,1 @@
+[![Run Tests](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-ChristofferEastcastle/actions/workflows/test.yml/badge.svg)](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-ChristofferEastcastle/actions/workflows/test.yml)
