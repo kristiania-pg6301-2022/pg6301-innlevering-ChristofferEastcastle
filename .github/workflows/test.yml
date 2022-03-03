@@ -15,6 +15,6 @@ jobs:
         with:
           node-version: 17.x
           cache: "npm"
-
       - run: npm ci
+      - run: npm run build
       - run: npm test
