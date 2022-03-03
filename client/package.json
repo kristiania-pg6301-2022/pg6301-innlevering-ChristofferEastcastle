@@ -37,7 +37,7 @@
   "jest": {
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
-      "*.jsx"
+      "/client/*.jsx"
     ]
   },
   "babel": {
