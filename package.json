@@ -1,0 +1,33 @@
+{
+  "name": "react-express-heroku",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "husky": "^7.0.4",
+    "prettier": "^2.5.1"
+  },
+  "scripts": {
+    "start": "cd server && npm start",
+    "dev": "concurrently npm:dev:server npm:dev:client",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "build": "npm install && npm run build:client && npm run build:server",
+    "build:client": "cd client && npm install && npm run build",
+    "build:server": "cd server && npm install",
+    "clean": "rm -r node_modules client/node_modules client/.parcel-cache client/dist server/node_modules",
+    "format": "prettier --write \"client/*.{jsx,js,tsx,ts}\" \"server/*.{jsx,js,tsx,ts}\"",
+    "format:check": "prettier --check \"client/*.{jsx,js,tsx,ts}\" \"server/*.{jsx,js,tsx,ts}\"",
+    "test": "cd client && npm test",
+    "verify": "cd client && npm test -- --collectCoverage"
+  },
+  "engines": {
+    "node": "16.14.0",
+    "npm": "^8.3.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
