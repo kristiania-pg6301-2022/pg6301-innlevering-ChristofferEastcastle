@@ -24,27 +24,8 @@ function FrontPage({ answered, correctAnswers }) {
   );
 }
 
-function QuestionPage({ answered, correctAnswers }) {
-  return (
-    <div>
-      <h1>Question</h1>
-      <p>**Click on the one you think is right**</p>
-      <Question answered={answered} correctAnswer={correctAnswers} />
-    </div>
-  );
-}
-
-function Question({ correctAnswer, answered }) {
+export function QuestionPage({ answered, correctAnswers }) {
   const [question, setQuestion] = useState();
-
-  useEffect(async () => {
-    const text = await fetchQuestion();
-    setQuestion(text.data);
-  }, []);
-
-  async function fetchQuestion() {
-    return axios.get("/api/question");
-  }
 
   const navigate = useNavigate();
 
@@ -58,26 +39,51 @@ function Question({ correctAnswer, answered }) {
     });
 
     if (correct.data === true) {
-      correctAnswer((c) => c + 1);
+      correctAnswers((c) => c + 1);
       navigate("/answer/correct");
     } else {
       navigate("/answer/wrong");
     }
   }
 
-  if (question) {
-    return (
-      <div>
-        <h4>{question.question}</h4>
-        {Object.keys(question.answers).map((k) => (
-          <p onClick={() => handleAnswer(k)} key={k}>
-            {question.answers[k]}
-          </p>
-        ))}
-      </div>
-    );
+  async function fetchQuestion() {
+    return axios.get("/api/question");
   }
-  return <h4>Loading...</h4>;
+
+  useEffect(async () => {
+    const text = await fetchQuestion();
+    setQuestion(text.data);
+  }, []);
+
+  return (
+    <div>
+      <h1>Question</h1>
+      <p>**Click on the one you think is right**</p>
+      <Question
+        question={question}
+        handleAnswer={handleAnswer}
+        answered={answered}
+        correctAnswer={correctAnswers}
+      />
+    </div>
+  );
+}
+
+export function Question({ question, handleAnswer }) {
+  if (!question) return <h4>Loading...</h4>;
+
+  return (
+    <div>
+      <h4>{question.question}</h4>
+      {Object.keys(question.answers)
+        .filter((k) => question.answers[k] != null)
+        .map((k) => (
+          <button style={{ margin: 5 }} onClick={() => handleAnswer(k)} key={k}>
+            {question.answers[k]}
+          </button>
+        ))}
+    </div>
+  );
 }
 
 export function QuizApplication() {

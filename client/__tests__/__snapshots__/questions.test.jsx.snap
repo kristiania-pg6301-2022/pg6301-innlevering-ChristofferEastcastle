@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`quiz application shows front page 1`] = `"<div><h1>QuizApplication</h1><h3>Correct answers: 0</h3><h3>Total answered: 0</h3><ul><li><a href=\\"/question\\">Answer question</a></li></ul></div>"`;
+
+exports[`quiz application shows mock question 1`] = `"<div><h4>Which of the following are core Kubernetes objects?</h4><p>Pods, Services, Volumes</p><p>Pods, Docker, Volumes</p><p>Pods, Services, Droplets</p><p>None of the mentioned</p><p></p><p></p></div>"`;
